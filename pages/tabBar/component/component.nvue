@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
 	<view class="search_nav">
 		<uni-search-bar class="uni-mt-8" bgColor="#f8f9fb" radius="100" placeholder="一直不显示" clearButton="none"
 			cancelButton="none" @confirm="search" />
@@ -16,7 +16,14 @@
 			</swiper>
 		</uni-swiper-dot>
 	</view>
-
+	<view class="nav-sort">
+		<view class="sort-item" v-for="(item) in 4">
+			<image
+				src="https://dsfs.oppo.com/archives/202205/202205181205436283cb1f48291.png?_w_=96&_h_=96&x-oss-process=image/format,webp"
+				mode="widthFix" style="width:100upx"></image>
+			<text>手机</text>
+		</view>
+	</view>
 </template>
 <script setup>
 	import {
@@ -29,7 +36,8 @@
 	import util from './util.js'
 	const {
 		swiperimages,
-		dotStyle
+		dotStyle,
+		dotsStyles
 	} = util
 	console.log('swiperimages', swiperimages);
 	const modeIndex = ref(-1)
@@ -37,12 +45,6 @@
 	const current = ref(0)
 	const mode = ref('dot')
 	const swiperDotIndex = ref(0)
-	const dotsStyles = ref({
-		backgroundColor: 'transparent',
-		border: '1px #fff solid',
-		selectedBackgroundColor: '#fff',
-		selectedBorder: '1px #fff solid'
-	})
 	const change = (e) => {
 		current.value = e.detail.current
 	}
@@ -99,6 +101,10 @@
 			height: 200px;
 			color: #fff;
 		}
+
+		::v-deep uni-image {
+			width: 100% !important;
+		}
 	}
 
 
@@ -120,8 +126,6 @@
 		border-color: #007aff;
 		border-width: 1px;
 	}
-
-	::v-deep uni-image {
-		width: 100% !important;
-	}
 </style>
+
+ -->
