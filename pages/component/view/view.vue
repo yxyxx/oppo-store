@@ -50,7 +50,8 @@
 					<view class="text" style="-webkit-flex: 1;flex: 1;">横向布局-平均分布</view>
 					<view class="text" style="-webkit-flex: 1;flex: 1;">横向布局-平均分布</view>
 				</view>
-				<view class="uni-flex uni-row" style="-webkit-justify-content: space-between;justify-content: space-between;">
+				<view class="uni-flex uni-row"
+					style="-webkit-justify-content: space-between;justify-content: space-between;">
 					<view class="text">横向布局-两端对齐</view>
 					<view class="text">横向布局-两端对齐</view>
 				</view>
@@ -69,13 +70,16 @@
 					<view class="text" style="width: 280rpx;">一行显示不全,wrap折行</view>
 				</view>
 				<view class="uni-flex uni-row">
-					<view class="text uni-flex" style="-webkit-flex: 1;flex: 1;height: 200rpx;-webkit-justify-content: center;justify-content: center;-webkit-align-items: flex-start;align-items: flex-start;">
+					<view class="text uni-flex"
+						style="-webkit-flex: 1;flex: 1;height: 200rpx;-webkit-justify-content: center;justify-content: center;-webkit-align-items: flex-start;align-items: flex-start;">
 						<text>垂直居顶</text>
 					</view>
-					<view class="text uni-flex" style="-webkit-flex: 1;flex: 1;height: 200rpx;-webkit-justify-content: center;justify-content: center;-webkit-align-items: center;align-items: center;">
+					<view class="text uni-flex"
+						style="-webkit-flex: 1;flex: 1;height: 200rpx;-webkit-justify-content: center;justify-content: center;-webkit-align-items: center;align-items: center;">
 						<text>垂直居中</text>
 					</view>
-					<view class="text uni-flex" style="-webkit-flex: 1;flex: 1;height: 200rpx;-webkit-justify-content: center;justify-content: center;-webkit-align-items: flex-end;align-items: flex-end;">
+					<view class="text uni-flex"
+						style="-webkit-flex: 1;flex: 1;height: 200rpx;-webkit-justify-content: center;justify-content: center;-webkit-align-items: flex-end;align-items: flex-end;">
 						<text>垂直居底</text>
 					</view>
 				</view>
@@ -86,10 +90,12 @@
 				<text>\nflex布局演示</text>
 			</view>
 			<view class="uni-flex uni-row">
-				<view class="text uni-flex" style="width: 200rpx;height: 220rpx;-webkit-justify-content: center;justify-content: center;-webkit-align-items: center;align-items: center;">
+				<view class="text uni-flex"
+					style="width: 200rpx;height: 220rpx;-webkit-justify-content: center;justify-content: center;-webkit-align-items: center;align-items: center;">
 					<image src="../../../static/plus.png" style="width: 150rpx;height: 150rpx;"></image>
 				</view>
-				<view class="uni-flex uni-column" style="-webkit-flex: 1;flex: 1;-webkit-justify-content: space-between;justify-content: space-between;">
+				<view class="uni-flex uni-column"
+					style="-webkit-flex: 1;flex: 1;-webkit-justify-content: space-between;justify-content: space-between;">
 					<view class="text" style="height: 120rpx;text-align: left;padding-left: 20rpx;padding-top: 10rpx;">
 						文字居左，留出左间距
 					</view>
@@ -139,6 +145,7 @@
 	.desc {
 		/* text-indent: 40rpx; */
 	}
+
 	.flex-pc {
 		display: flex;
 		justify-content: center;

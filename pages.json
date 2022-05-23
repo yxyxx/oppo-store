@@ -15,8 +15,10 @@
 		// pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/tabBar/component/component",
+
 			"style": {
 				"navigationBarTitleText": "内置组件",
+
 				"app-plus": {
 					"bounce": "vertical",
 					"titleNView": {
@@ -1315,6 +1317,7 @@
 		"backgroundColor": "#F8F8F8",
 		"backgroundColorTop": "#F4F5F6",
 		"backgroundColorBottom": "#F4F5F6",
+		"navigationStyle": "custom",
 		"mp-360": {
 			"navigationStyle": "custom"
 		},
