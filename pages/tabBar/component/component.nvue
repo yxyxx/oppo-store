@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
 	<view class="search_nav">
 		<uni-search-bar class="uni-mt-8" bgColor="#f8f9fb" radius="100" placeholder="一直不显示" clearButton="none"
 			cancelButton="none" @confirm="search" />
@@ -127,5 +127,3 @@
 		border-width: 1px;
 	}
 </style>
-
- -->

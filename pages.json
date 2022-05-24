@@ -24,7 +24,7 @@
 							"text": "\ue534",
 							"fontSrc": "/static/uni.ttf",
 							"fontSize": "22px",
-							"color": "#FFFFFF"
+							"color": "#000"
 						}]
 					}
 				}
@@ -40,7 +40,7 @@
 							"text": "\ue534",
 							"fontSrc": "/static/uni.ttf",
 							"fontSize": "22px",
-							"color": "#FFFFFF"
+							"color": "#000"
 						}]
 					}
 				}
@@ -56,7 +56,7 @@
 							"text": "\ue534",
 							"fontSrc": "/static/uni.ttf",
 							"fontSize": "22px",
-							"color": "#FFFFFF"
+							"color": "#000"
 						}]
 					}
 				}
@@ -72,11 +72,17 @@
 							"text": "\ue534",
 							"fontSrc": "/static/uni.ttf",
 							"fontSize": "22px",
-							"color": "#FFFFFF"
+							"color": "#000"
 						}]
 					}
 				}
 			}
+		},
+		{
+			"path": "pages/oppoSearch/index"
+		},
+		{
+			"path": "pages/oppoSearchResult/index"
 		},
 		{
 			"path": "pages/component/view/view",
@@ -240,10 +246,10 @@
 		},
 		// #ifndef MP-ALIPAY || MP-TOUTIAO || VUE3
 		// {
-		// 	"path": "pages/component/audio/audio",
-		// 	"style": {
-		// 		"navigationBarTitleText": "audio"
-		// 	}
+		//  "path": "pages/component/audio/audio",
+		//  "style": {
+		//  "navigationBarTitleText": "audio"
+		//  }
 		// },
 		// #endif
 		// #ifndef MP-TOUTIAO
@@ -1310,12 +1316,12 @@
 	"globalStyle": {
 		"pageOrientation": "portrait",
 		"navigationBarTitleText": "Hello uniapp",
-		"navigationBarTextStyle": "white",
-		"navigationBarBackgroundColor": "#007AFF",
+		"navigationBarTextStyle": "black",
+		"navigationBarBackgroundColor": "#F7F7F7",
 		"backgroundColor": "#F8F8F8",
 		"backgroundColorTop": "#F4F5F6",
 		"backgroundColorBottom": "#F4F5F6",
-		"navigationStyle": "custom",
+		// "navigationStyle": "custom",
 		"mp-360": {
 			"navigationStyle": "custom"
 		},

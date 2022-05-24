@@ -1,11 +1,11 @@
 <template>
 	<view class="search-box" @click="search">
 		<view class="search-inp"
-			style="width:100%;background-color: rgb(248, 249, 251);height: 72upx;line-height: 92upx;border-radius: 20upx;padding-left: 20upx;box-sizing: border-box;">
-			<image src="../static/search.png" mode="widthFix" style="width: 40upx;"></image>
+			style="width:100%;background-color: rgb(248, 249, 251);height: 72rpx;line-height: 92rpx;border-radius: 20rpx;padding-left: 20rpx;box-sizing: border-box;">
+			<image src="../static/search.png" mode="widthFix" style="width: 40rpx;"></image>
 		</view>
 		<swiper class="swiper-box" @change="change" vertical="true" autoplay="true" interval="3000" circular
-			style="height: 40upx;width:400upx">
+			style="height: 40rpx;width:400rpx">
 			<swiper-item v-for="(item ,index) in info" :key="index" @touchmove.stop="stopTouchMove"
 				style="opacity: .5;">
 				<view class="swiper-item">
@@ -35,11 +35,15 @@
 		return false
 	}
 	const current = ref('')
+	current.value = info[0].content
 	const change = (val) => {
 		current.value = info[val.detail.current].content
 	}
 	const search = () => {
 		console.log(current.value);
+		uni.navigateTo({
+			url: '/pages/oppoSearch/index?word=' + current.value
+		})
 	}
 </script>
 
@@ -51,7 +55,7 @@
 		justify-content: space-between;
 		align-items: center;
 		position: relative;
-		padding: 20upx;
+		padding: 20rpx;
 		box-sizing: border-box;
 
 		.uni-mt-8 {
@@ -64,8 +68,8 @@
 
 		.swiper-box {
 			position: absolute;
-			top: 35upx;
-			left: 88upx;
+			top: 35rpx;
+			left: 88rpx;
 		}
 	}
 </style>

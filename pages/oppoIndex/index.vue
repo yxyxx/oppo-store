@@ -1,4 +1,5 @@
 <template>
+	<page-meta @scroll="scroll"></page-meta>
 	<!-- input -->
 	<view class="search_nav">
 		<Search style="width: 88%;"></Search>
@@ -20,13 +21,13 @@
 	<!-- navsort -->
 	<view class="nav-sort">
 		<view class="sort-item" v-for="(item) in navSort">
-			<image :src="item.img" mode="widthFix" style="width:100upx"></image>
+			<image :src="item.img" mode="widthFix" style="width:100rpx"></image>
 			<view>{{item.text}}</view>
 		</view>
 	</view>
 	<view class="main">
 		<view class="floor-panel-contain">
-			<image :src="item" mode="widthFix" style="width:48.9%;margin-bottom: 15upx;"
+			<image :src="item" mode="widthFix" style="width:48.9%;margin-bottom: 15rpx;"
 				v-for="item in floorPanelImages">
 			</image>
 		</view>
@@ -51,7 +52,7 @@
 		</view>
 		<view class="goodsList">
 			<view class="goodsItem" v-for="item in todayRobList">
-				<image :src="item.img" mode="widthFix" style="width: 184upx;"></image>
+				<image :src="item.img" mode="widthFix" style="width: 184rpx;"></image>
 				<view class="info">
 					{{item.info}}
 				</view>
@@ -69,13 +70,15 @@
 	<!-- 大分类 -->
 	<view class="main">
 		<view class="sort-pannel" v-for="item in sortPannel">
-			<view class="title" style="margin-top:20upx">{{item.title}}</view>
-			<image :src="item.bannerImage" mode="widthFix" style="width:100%;border-radius: 20upx;margin: 25upx 0;">
+			<view class="title" style="margin-top:20rpx">{{item.title}}</view>
+			<image :src="item.bannerImage" mode="widthFix" style="width:100%;border-radius: 20rpx;margin: 25rpx 0;">
 			</image>
 			<view class="sort-item" v-for="itemList in item.list">
-				<image :src="itemList.img" mode="widthFix" style="width: 100%;"></image>
-				<view class="info">
-					{{itemList.info}}
+				<view class="">
+					<image :src="itemList.img" mode="widthFix" style="width: 100%;"></image>
+					<view class="info">
+						{{itemList.info}}
+					</view>
 				</view>
 				<view class="price">
 					<text>{{itemList.calculation}}</text>
@@ -86,7 +89,7 @@
 	</view>
 	<!-- 底部 -->
 	<Footer></Footer>
-	<GoTop></GoTop>
+	<GoTop :isShow="isShow"></GoTop>
 </template>
 <script setup>
 	import {
@@ -107,12 +110,19 @@
 	import Footer from '@/components/footer.vue'
 	import Search from '@/components/search.vue'
 	import GoTop from '@/components/goTop.vue'
-	// console.log('swiperimages', swiperimages);
 	const modeIndex = ref(-1)
 	const styleIndex = ref(-1)
 	const current = ref(0)
 	const mode = ref('dot')
 	const swiperDotIndex = ref(0)
+	const isShow = ref(false)
+	const scroll = function(e) {
+		if (e.detail.scrollTop > 500) {
+			isShow.value = true
+		} else {
+			isShow.value = false
+		}
+	}
 	const change = (e) => {
 		current.value = e.detail.current
 	}
@@ -143,7 +153,7 @@
 </script>
 
 <style lang="scss" scoped>
-	@import 'http://at.alicdn.com/t/font_3422919_xw681okc95.css';
+	@import '@/common/iconfont.css';
 	// @import '../../../common/uni-nvue.css';
 
 	.search_nav {
@@ -157,7 +167,6 @@
 			width: 12%;
 			text-align: left;
 		}
-
 	}
 
 	.swiper-bannner {
@@ -183,7 +192,7 @@
 
 	.nav-sort {
 		display: flex;
-		padding: 30upx 0;
+		padding: 30rpx 0;
 		background-color: #fff;
 
 		.sort-item {
@@ -194,8 +203,8 @@
 	}
 
 	.main {
-		padding: 0 24upx;
-		margin-top: 25upx;
+		padding: 0 24rpx;
+		margin-top: 25rpx;
 	}
 
 	.floor-panel-contain {
@@ -208,39 +217,43 @@
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
-		margin-top: 15upx;
+		margin-top: 15rpx;
 	}
 
 	.sort-pannel {
-		font-size: 30upx;
-		line-height: 85upx;
+		font-size: 30rpx;
+		line-height: 85rpx;
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
-		line-height: 40upx;
+		line-height: 40rpx;
 
 		.sort-item {
 			background-color: #fff;
 			width: 32.5%;
-			margin-top: 8upx;
-			border-radius: 10upx;
-			padding: 15upx 0 30upx;
+			margin-top: 8rpx;
+			border-radius: 10rpx;
+			padding: 15rpx 0 30rpx;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
 		}
 
 		.info,
 		.price {
-			padding: 0 15upx;
+			padding: 0 15rpx;
 		}
 
 		.info {
-			font-size: 26upx
+			font-size: 26rpx
 		}
 
 		.price {
-			font-size: 26upx;
+			font-size: 26rpx;
+			justify-self: flex-end;
 
 			text {
-				font-size: 12upx;
+				font-size: 12rpx;
 
 				&::after {
 					content: '￥'
@@ -260,16 +273,16 @@
 		}
 
 		.title {
-			line-height: 60upx;
+			line-height: 60rpx;
 
 			.left {
 				.titleText {
-					font-size: 32upx
+					font-size: 32rpx
 				}
 
 				.countdown {
 					::v-deep .uni-countdown__number {
-						font-size: 24upx !important
+						font-size: 24rpx !important
 					}
 
 					text {
@@ -282,11 +295,11 @@
 			.more {
 				color: #999;
 
-				font-size: 28upx;
+				font-size: 28rpx;
 
 				&:after {
 					content: "\e62b";
-					font-size: 24upx
+					font-size: 24rpx
 				}
 			}
 		}
@@ -296,49 +309,49 @@
 			flex-wrap: nowrap;
 			align-items: center;
 			overflow: auto;
-			border-radius: 10upx;
+			border-radius: 10rpx;
 			-ms-overflow-style: none;
 			overflow: -moz-scrollbars-none;
 			background-color: #fff;
-			// padding-right: 40upx;
+			padding-right: 40rpx;
 
 			&::-webkit-scrollbar {
 				width: 0 !important
 			}
 
 			.goodsItem {
-				width: 208upx;
+				width: 208rpx;
 				text-align: center;
 
 				.info {
 					white-space: nowrap;
 					overflow: hidden;
 					text-overflow: ellipsis;
-					padding: 0 10upx;
+					padding: 0 10rpx;
 					box-sizing: border-box;
-					font-size: 28upx;
+					font-size: 28rpx;
 				}
 
 				.price {
 					text-align: left;
-					padding: 0 10upx;
+					padding: 0 10rpx;
 					box-sizing: border-box;
-					margin: 10upx 0 0;
+					margin: 10rpx 0 0;
 
 					.newPrice,
 					.oldPrice {
 						&::before {
 							content: "￥";
-							font-size: 18upx
+							font-size: 18rpx
 						}
 					}
 
 					.newPrice {
-						font-size: 28upx;
+						font-size: 28rpx;
 					}
 
 					.oldPrice {
-						font-size: 24upx;
+						font-size: 24rpx;
 						color: #999;
 					}
 				}
@@ -346,32 +359,32 @@
 
 			.moreGoods {
 				border: 1px solid #ddd;
-				border-radius: 10upx;
-				height: 230upx;
-				margin: 40upx 40upx 0 40upx;
+				border-radius: 10rpx;
+				height: 230rpx;
+				margin: 40rpx 40rpx 0 40rpx;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				flex-direction: column;
 
 				.title {
-					font-size: 30upx;
-					width: 140upx;
+					font-size: 30rpx;
+					width: 140rpx;
 					text-align: center;
 					display: block;
-					line-height: 35upx;
+					line-height: 35rpx;
 					color: #999;
 				}
 
 				.iconfont {
-					width: 46upx;
-					height: 46upx;
+					width: 46rpx;
+					height: 46rpx;
 					border-radius: 50%;
 					background-color: #eee;
 					text-align: center;
-					line-height: 46upx;
+					line-height: 46rpx;
 					color: #ccc;
-					margin-top: 20upx;
+					margin-top: 20rpx;
 				}
 			}
 		}
