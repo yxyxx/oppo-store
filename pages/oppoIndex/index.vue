@@ -93,7 +93,6 @@
 </template>
 <script setup>
 	import {
-		computed,
 		ref,
 	} from 'vue'
 	import util from './util.js'

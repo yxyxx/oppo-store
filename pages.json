@@ -79,10 +79,22 @@
 			}
 		},
 		{
-			"path": "pages/oppoSearch/index"
+			"path": "pages/oppoSearch/index",
+			"style": {
+				"navigationBarTitleText": "搜索"
+			}
 		},
 		{
-			"path": "pages/oppoSearchResult/index"
+			"path": "pages/oppoSearchResult/index",
+			"style": {
+				"navigationBarTitleText": "搜索结果"
+			}
+		},
+		{
+			"path": "pages/goodsDatail/index",
+			"style": {
+				"navigationBarTitleText": "商品详情"
+			}
 		},
 		{
 			"path": "pages/component/view/view",

@@ -28,27 +28,58 @@
 	onLoad((options) => {
 		placeholderWord.value = options.word
 	});
-	const search = (val) => {
-		console.log('searchval', typeof(val), 1111, searchValue.value);
-		if (typeof(val) == 'string') {
-			console.log(val);
-			uni.navigateTo({
-				url: '/pages/oppoSearchResult/index?word=' + val
-			})
-		} else {
-			console.log(searchValue.value);
-			uni.navigateTo({
-				url: '/pages/oppoSearchResult/index?word=' + searchValue.value
-			})
+	// 点击搜索跳转页面，保存浏览记录
+	const search = (val, type) => {
+		if (val) {
+			if (typeof(val) == 'string') {
+				if (!type) {
+					uni.getStorageSync('searchWord') ? uni.setStorageSync('searchWord', [val, ...uni
+						.getStorageSync(
+							'searchWord')
+					]) : uni.setStorageSync('searchWord', [val])
+				}
+				uni.navigateTo({
+					url: '/pages/oppoSearchResult/index?word=' + val
+				})
+			} else {
+				if (!type) {
+					// 如果输入为空时，默认搜索placeholderWord
+					if (searchValue.value.trim().length == 0) {
+						uni.getStorageSync('searchWord') ? uni.setStorageSync('searchWord', [searchValue.value, ...
+							uni
+							.getStorageSync('searchWord')
+						]) : uni.setStorageSync('searchWord', [placeholderWord.value]);
+						uni.navigateTo({
+							url: '/pages/oppoSearchResult/index?word=' + placeholderWord.value
+						})
+					} else {
+						uni.getStorageSync('searchWord') ? uni.setStorageSync('searchWord', [searchValue.value, ...
+							uni
+							.getStorageSync('searchWord')
+						]) : uni.setStorageSync('searchWord', [searchValue.value]);
+						uni.navigateTo({
+							url: '/pages/oppoSearchResult/index?word=' + searchValue.value
+						})
+					}
+				}
+			}
 		}
 	}
 	defineExpose({
 		search
 	})
+	const currentRoutes = getCurrentPages();
+	const currentRoute = currentRoutes[currentRoutes.length - 1].route
 	const back = () => {
-		uni.navigateBack({
-			delta: 1, //返回层数，2则上上页
-		})
+		if (currentRoute == 'pages/oppoSearchResult/index') {
+			uni.navigateTo({
+				url: '/pages/oppoSearch/index'
+			})
+		} else {
+			uni.switchTab({
+				url: '/pages/oppoIndex/index',
+			})
+		}
 	}
 </script>
 
