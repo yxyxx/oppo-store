@@ -10,7 +10,7 @@
 	<!-- swiper -->
 	<view class="swiper-bannner" @click="clicBanner">
 		<uni-swiper-dot class="uni-swiper-dot-box" @clickItem=clickItem :info="util.swiperimages" :current="current"
-			:mode="mode" :dots-styles="dotsStyles" field="content" :dotsStyles="dotsStyles">
+			:mode="mode" :dots-styles="dotsStyles" field="content">
 			<swiper class="swiper-box" @change="change" :current="swiperDotIndex" autoplay circular interval=3000>
 				<swiper-item v-for="(item, index) in util.swiperimages" :key="index">
 					<image :src="item" mode="heightFix" width="100%"></image>
@@ -20,7 +20,7 @@
 	</view>
 	<!-- navsort -->
 	<view class="nav-sort">
-		<view class="sort-item" v-for="(item) in navSort">
+		<view class="sort-item" v-for="(item) in navSort" :key="item">
 			<image :src="item.img" mode="widthFix" style="width:100rpx"></image>
 			<view>{{item.text}}</view>
 		</view>
@@ -28,11 +28,11 @@
 	<view class="main">
 		<view class="floor-panel-contain">
 			<image :src="item" mode="widthFix" style="width:48.9%;margin-bottom: 15rpx;"
-				v-for="item in floorPanelImages">
+				v-for="item in floorPanelImages" :key="item">
 			</image>
 		</view>
 		<view class="floor-panel-column-contain">
-			<image :src="item" mode="widthFix" style="width:23.5%;" v-for="item in floorPanelColumnImages">
+			<image :src="item" mode="widthFix" style="width:23.5%;" v-for="item in floorPanelColumnImages" :key="item">
 			</image>
 		</view>
 	</view>
@@ -51,7 +51,7 @@
 			</view>
 		</view>
 		<view class="goodsList">
-			<view class="goodsItem" v-for="item in todayRobList">
+			<view class="goodsItem" v-for="item in todayRobList" :key="item">
 				<image :src="item.img" mode="widthFix" style="width: 184rpx;"></image>
 				<view class="info">
 					{{item.info}}
@@ -69,11 +69,11 @@
 	</view>
 	<!-- 大分类 -->
 	<view class="main">
-		<view class="sort-pannel" v-for="item in sortPannel">
+		<view class="sort-pannel" v-for="item in sortPannel" :key="item">
 			<view class="title" style="margin-top:20rpx">{{item.title}}</view>
 			<image :src="item.bannerImage" mode="widthFix" style="width:100%;border-radius: 20rpx;margin: 25rpx 0;">
 			</image>
-			<view class="sort-item" v-for="itemList in item.list">
+			<view class="sort-item" v-for="itemList in item.list" :key="itemList">
 				<view class="">
 					<image :src="itemList.img" mode="widthFix" style="width: 100%;"></image>
 					<view class="info">
