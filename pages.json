@@ -31,9 +31,9 @@
 			}
 		},
 		{
-			"path": "pages/tabBar/API/API",
+			"path": "pages/oppoSort/index",
 			"style": {
-				"navigationBarTitleText": "接口",
+				"navigationBarTitleText": "分类",
 				"app-plus": {
 					"titleNView": {
 						"buttons": [{
@@ -91,7 +91,7 @@
 			}
 		},
 		{
-			"path": "pages/goodsDatail/index",
+			"path": "pages/goodsDetail/index",
 			"style": {
 				"navigationBarTitleText": "商品详情"
 			}
@@ -1356,7 +1356,7 @@
 				"text": "内置组件"
 			},
 			{
-				"pagePath": "pages/tabBar/API/API",
+				"pagePath": "pages/oppoSort/index",
 				"iconPath": "static/api.png",
 				"selectedIconPath": "static/apiHL.png",
 				"text": "接口"

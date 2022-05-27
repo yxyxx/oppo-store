@@ -8,7 +8,7 @@
 		</view>
 		<uni-search-bar class="uni-mt-10" radius="100" :placeholder="placeholderWord" clearButton="none"
 			cancelButton="none" v-model="searchValue" @confirm="search"
-			style="width: 80%;justify-content: left !important;" />
+			style="width: 70%;justify-content: left !important;" />
 		<view class="seach-btn" @click="search">
 			搜索
 		</view>
@@ -97,7 +97,7 @@
 		}
 
 		.seach-btn {
-			width: 10%;
+			width: 13%;
 			text-align: left;
 			font-size: 30rpx
 		}

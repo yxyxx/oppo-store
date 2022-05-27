@@ -1,5 +1,4 @@
 <template>
-	<!-- <page-meta @scroll="scroll"></page-meta> -->
 	<!-- 详情导航 -->
 	<view class="topNav">
 		<view class="back" @click="back">
@@ -96,10 +95,14 @@
 		<view class="title">为你推荐</view>
 		<uni-swiper-dot class="uni-swiper-dot-box" :info="recomSwiperInfo" :current="recomSwiperCurrent" :mode="'dot'"
 			:dots-styles="recomSwiperDotsStyles" field="content">
-			<swiper class="swiper-box" @change="recomSwiperChange" :current="recomSwiperDotIndex">
-				<swiper-item v-for="(item, index) in 3" :key="index">
-					<view class="swiper-item" :class="'swiper-item' + index">
-						<text style="color: #fff; font-size: 32px;">{{index+1}}</text>
+			<swiper class="swiper-box" @change="recomSwiperChange" :current="recomSwiperDotIndex"
+				style="height: 970rpx !important;">
+				<swiper-item v-for="(item, index) in 2" :key="index">
+					<view class="recommItem">
+						<goods-item
+							style="width: 30%;border: 1px solid #9e9e9e;border-radius: 10rpx;margin-bottom: 20rpx;"
+							v-for="item in 6">
+						</goods-item>
 					</view>
 				</swiper-item>
 			</swiper>
@@ -116,9 +119,9 @@
 	<uni-goods-nav :options="footerOptions" :fill="true" :button-group="footerButtonGroup" @click="footerOptionsClick"
 		@buttonClick="footerBuyClick" style="position: fixed;bottom: 0;left: 0;right: 0;"></uni-goods-nav>
 
-	<!-- <GoTop :isShow="isShow"></GoTop> -->
+	<GoTop :isShow="isShow"></GoTop>
 	<!-- 弹窗 -->
-	<uni-popup ref="popup" background-color="#fff" @change="popupChange" cancelText="closeempty">
+	<uni-popup ref="popup" background-color="#fff" @change="popupChange" cancelText="closeempty" class="popup">
 		<view class="popup-content">
 			<view class="popupTitle">
 				<text>{{popupContent == 'preferential'?'优惠说明':popupContent == 'promptService'?'服务说明':''}}</text>
@@ -168,25 +171,48 @@
 			</view>
 		</view>
 	</uni-popup>
-
+	<!-- 详情swiper弹框 -->
+	<uni-popup ref="detailPopup" @change="detailPopupChange" class="detailPopup" background-color="transparent"
+		mask-background-color="rgba(0,0,0,.9)">
+		<view class="popup-content">
+			<uni-swiper-dot class="uni-swiper-dot-box" @clickItem=clickItem :info="goodsDetail.swiperBanner"
+				:current="current" :mode="'nav'" field="content">
+				<swiper class="swiper-box" @change="change" :current="swiperDotIndex" style="height: 100vw !important;">
+					<swiper-item v-for="(item, index) in goodsDetail.swiperBanner" :key="index">
+						<image :src="item.url" mode="widthFix" style="width: 100%;"></image>
+					</swiper-item>
+				</swiper>
+			</uni-swiper-dot>
+		</view>
+	</uni-popup>
 </template>
 
 <script setup>
 	import {
 		ref,
+		onMounted
 	} from 'vue'
 	import {
-		onLoad
+		onLoad,
+		onPageScroll
 	} from '@dcloudio/uni-app';
 	import {
 		goodsDetail,
 		dotStyles
 	} from './utils'
-	// import  from './utils'
-	console.log('goodsDetail', goodsDetail, dotStyles);
+	import goodsItem from '@/components/goodsItem.vue'
+	import GoTop from '@/components/goTop.vue'
 	let goodsName = ''
+	// 返回顶部
+	const isShow = ref(false)
+	onPageScroll((e) => {
+		if (e.scrollTop > 500) {
+			isShow.value = true
+		} else {
+			isShow.value = false
+		}
+	})
 	onLoad((options) => {
-		console.log(options.goods);
 		goodsName = options.goods
 		uni.setNavigationBarTitle({
 			title: goodsName
@@ -198,8 +224,34 @@
 		detailSwiperCurrent.value = e.detail.current
 	}
 	// 点击swiper图片
+	const detailPopup = ref('detailPopup')
+	const swiperDotIndex = ref(0)
+	const info = [{
+			colorClass: 'uni-bg-red',
+			url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/094a9dc0-50c0-11eb-b680-7980c8a877b8.jpg',
+			content: '内容 A'
+		},
+		{
+			colorClass: 'uni-bg-green',
+			url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/094a9dc0-50c0-11eb-b680-7980c8a877b8.jpg',
+			content: '内容 B'
+		},
+		{
+			colorClass: 'uni-bg-blue',
+			url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/094a9dc0-50c0-11eb-b680-7980c8a877b8.jpg',
+			content: '内容 C'
+		}
+	]
+	const current = ref(0)
 	const clicDeatilSwiperBanner = (item) => {
 		console.log(item);
+		detailPopup.value.open()
+	}
+	const clickItem = (e) => {
+		swiperDotIndex = e
+	}
+	const change = (e) => {
+		current.value = e.detail.current
 	}
 	// 商品规格选择
 	const radio1 = ref(0)
@@ -268,16 +320,7 @@
 
 		}
 	}
-	const isShow = ref(false)
-	console.log(isShow);
-	const scroll = function(e) {
-		console.log(2222222222222222);
-		if (e.detail.scrollTop > 500) {
-			isShow.value = true
-		} else {
-			isShow.value = false
-		}
-	}
+
 	// 弹窗
 	const popupType = ref('bottom')
 	const popup = ref('popup')
@@ -297,20 +340,11 @@
 	const recomSwiperDotIndex = ref(0)
 	const recomSwiperCurrent = ref(0)
 	const recomSwiperInfo = [{
-			colorClass: 'uni-bg-red',
-			url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/094a9dc0-50c0-11eb-b680-7980c8a877b8.jpg',
 			content: '内容 A'
 		},
 		{
-			colorClass: 'uni-bg-green',
-			url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/094a9dc0-50c0-11eb-b680-7980c8a877b8.jpg',
 			content: '内容 B'
 		},
-		{
-			colorClass: 'uni-bg-blue',
-			url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/094a9dc0-50c0-11eb-b680-7980c8a877b8.jpg',
-			content: '内容 C'
-		}
 	]
 	const recomSwiperDotsStyles = [{
 			backgroundColor: 'rgba(0, 0, 0, .3)',
@@ -326,20 +360,13 @@
 			selectedBackgroundColor: 'rgba(255, 90, 95,0.9)',
 			selectedBorder: '1px rgba(255, 90, 95,0.9) solid'
 		},
-		{
-			backgroundColor: 'rgba(83, 200, 249,0.3)',
-			border: '1px rgba(83, 200, 249,0.3) solid',
-			color: '#fff',
-			selectedBackgroundColor: 'rgba(83, 200, 249,0.9)',
-			selectedBorder: '1px rgba(83, 200, 249,0.9) solid'
-		}
 	]
 	const recomSwiperChange = (e) => {
 		recomSwiperCurrent.value = e.detail.current
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import url(@/common/iconfont.css);
 
 	.topNav {
@@ -348,6 +375,11 @@
 		background-color: #fff;
 		border-bottom: 1rpx solid #eee;
 		height: 86rpx;
+		position: fixed;
+		top: 88rpx;
+		left: 0;
+		right: 0;
+		z-index: 99;
 
 		.back {
 			width: 20%;
@@ -377,29 +409,82 @@
 	}
 
 	// 轮播图
-	::v-deep .uni-swiper__dots-box[data-v-77b53eff] {
-		// right: 0 !important;
-		width: 70rpx;
-		left: calc(100vw - 100rpx);
-		border-radius: 10rpx;
-		padding: 10rpx 0;
-		bottom: 15rpx !important;
-		text-align: center;
-		background-color: rgba(0, 0, 0, .3);
+	// #ifdef H5
+	.detailSwiper {
+		::v-deep .uni-swiper__dots-box[data-v-77b53eff] {
+			width: 70rpx;
+			left: calc(100vw - 100rpx);
+			border-radius: 10rpx;
+			padding: 10rpx 0;
+			bottom: 15rpx !important;
+			text-align: center;
+			background-color: rgba(0, 0, 0, .3);
+		}
+
+		::v-deep .uni-swiper__dots-nav-item[data-v-77b53eff] {
+			margin: 0;
+			width: 100%;
+			text-align: center;
+		}
+
+		::v-deep .uni-swiper__dots-nav-item[data-v-77b53eff] {
+			font-size: 24rpx
+		}
+
 	}
 
-	::v-deep .uni-swiper__dots-nav-item[data-v-77b53eff] {
-		margin: 0;
-		width: 100%;
-		text-align: center;
+	::v-deep .detailPopup uni-view[data-v-7c43d41b] {
+		max-height: 100vh !important;
 	}
 
-	::v-deep .uni-swiper__dots-nav-item[data-v-77b53eff] {
-		// text-align: center;
-		font-size: 24rpx
+	// #endif
+
+	// #ifdef MP-WEIXIN
+	.detailSwiper {
+		.uni-swiper__dots-box[data-v-77b53eff] {
+			width: 70rpx;
+			left: calc(100vw - 100rpx);
+			border-radius: 10rpx;
+			padding: 10rpx 0;
+			bottom: 15rpx !important;
+			text-align: center;
+			background-color: rgba(0, 0, 0, .3);
+		}
+
+		.uni-swiper__dots-nav-item[data-v-77b53eff] {
+			margin: 0;
+			width: 100%;
+			text-align: center;
+		}
+
+		.uni-swiper__dots-nav-item[data-v-77b53eff] {
+			font-size: 24rpx
+		}
 	}
 
-	// 价格banner
+	.individualChoice .is-checked {
+		border-color: #f63434 !important;
+	}
+
+	// #endif
+	// 点击轮播图
+	::v-deep .detailPopup {
+		.uni-popup__wrapper {
+			width: 100% !important;
+		}
+
+		.uni-swiper__dots-nav[data-v-77b53eff] {
+			position: fixed !important;
+			top: 50px !important;
+			height: 30px !important;
+			justify-content: center !important;
+			background-color: transparent !important;
+		}
+
+	}
+
+	// 价格banner 
+
 	.priceBanner {
 		min-height: 120rpx;
 		background-size: 100% 100%;
@@ -416,7 +501,6 @@
 			color: #fff;
 			display: flex;
 			align-items: center;
-
 			font-size: 34rpx;
 
 			.integer {
@@ -500,6 +584,7 @@
 	}
 
 	// 商品选择
+	// #ifdef H5
 	::v-deep .is--tag[data-v-84d5d996] {
 		border: 1px solid #efeff4 !important;
 	}
@@ -513,6 +598,7 @@
 		font-size: 26rpx !important;
 	}
 
+	// #endif
 	.individualChoice {
 		display: flex;
 		align-items: center;
@@ -526,6 +612,50 @@
 		}
 	}
 
+	// 为你推荐
+	.recommended {
+		background-color: #fff;
+		border-radius: 30rpx;
+		margin: 0 30rpx;
+		padding: 0 20rpx;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+
+		.title {
+			padding: 30rpx 20rpx 30rpx;
+		}
+
+		.recommItem {
+			width: 100%;
+			display: flex;
+			justify-content: space-around;
+			flex-wrap: wrap;
+
+			.title {
+				padding: 0;
+				font-size: 27rpx;
+			}
+		}
+
+		// #ifdef H5
+		::v-deep .uni-swiper__dots-box[data-v-77b53eff] {
+			position: static !important;
+			align-self: center;
+			margin-bottom: 30rpx;
+		}
+
+		// #endif
+	}
+
+	// #ifdef MP-WEIXIN
+	.recommended .uni-swiper__dots-box[data-v-77b53eff] {
+		position: static !important;
+		align-self: center;
+		margin-bottom: 30rpx;
+	}
+
+	// #endif
 	.selecNum {
 		display: flex;
 		align-items: center;
@@ -562,14 +692,28 @@
 		}
 	}
 
-	::v-deep uni-view[data-v-7c43d41b] {
-		border-radius: 40rpx 40rpx 0rpx 0rpx !important;
-		overflow: hidden !important;
-		max-height: 992rpx;
+	.popup {
+
+		// #ifdef H5
+		::v-deep uni-view[data-v-7c43d41b] {
+			border-radius: 40rpx 40rpx 0rpx 0rpx !important;
+			overflow: hidden !important;
+			max-height: 992rpx;
+		}
+
+		::v-deep uni-view[data-v-7c43d41b] uni-view:first-child {
+			background-color: rgba(0, 0, 0, .9) !important;
+		}
+
+		::v-deep .uni-popup__wrapper {
+			background-color: transparent !important;
+		}
+
+		// #endif
+
 	}
 
 	.popup-content {
-
 		.popupTitle {
 			display: flex;
 			justify-content: space-between;

@@ -1,5 +1,4 @@
 <template>
-	<page-meta @scroll="scroll"></page-meta>
 	<!-- input -->
 	<view class="search_nav">
 		<Search style="width: 88%;"></Search>
@@ -96,6 +95,18 @@
 		ref,
 	} from 'vue'
 	import util from './util.js'
+	import {
+		onLoad,
+		onPageScroll
+	} from '@dcloudio/uni-app';
+	// 返回顶部
+	onPageScroll((e) => {
+		if (e.scrollTop > 500) {
+			isShow.value = true
+		} else {
+			isShow.value = false
+		}
+	})
 	const {
 		swiperimages,
 		dotStyle,
@@ -115,13 +126,6 @@
 	const mode = ref('dot')
 	const swiperDotIndex = ref(0)
 	const isShow = ref(false)
-	const scroll = function(e) {
-		if (e.detail.scrollTop > 500) {
-			isShow.value = true
-		} else {
-			isShow.value = false
-		}
-	}
 	const change = (e) => {
 		current.value = e.detail.current
 	}
@@ -153,7 +157,6 @@
 
 <style lang="scss" scoped>
 	@import '@/common/iconfont.css';
-	// @import '../../../common/uni-nvue.css';
 
 	.search_nav {
 		background-color: #fff;
@@ -286,14 +289,12 @@
 
 					text {
 						color: #999;
-
 					}
 				}
 			}
 
 			.more {
 				color: #999;
-
 				font-size: 28rpx;
 
 				&:after {

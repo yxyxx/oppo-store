@@ -1,6 +1,5 @@
 <template>
-	<page-meta @scroll="scroll"></page-meta>
-	<searchInp></searchInp>
+	<searchInp style="position: fixed;top: 88rpx;left:0;right:0;z-index: 99;"></searchInp>
 	<view class="searchFilter">
 		<view :class="['filterItem',{'active':activeFilter=='all'}]" @click="clicFilter('all')">
 			综合
@@ -52,11 +51,19 @@
 		ref,
 	} from 'vue';
 	import {
-		onLoad
+		onLoad,
+		onPageScroll
 	} from '@dcloudio/uni-app';
 	import searchInp from '@/components/searchInp.vue'
 	import GoTop from '@/components/goTop.vue'
 	const isShow = ref(false)
+	onPageScroll((e) => {
+		if (e.scrollTop > 500) {
+			isShow.value = true
+		} else {
+			isShow.value = false
+		}
+	})
 	let searchWord = ''
 	onLoad((options) => {
 		searchWord = options.word
@@ -64,13 +71,6 @@
 			title: searchWord
 		});
 	});
-	const scroll = function(e) {
-		if (e.detail.scrollTop > 500) {
-			isShow.value = true
-		} else {
-			isShow.value = false
-		}
-	}
 	const activeFilter = ref('all')
 	const priceFilter = ref('')
 	const clicFilter = (val) => {
@@ -162,7 +162,7 @@
 	function wapperClick(item) {
 		console.log('单项点击事件', item.desc)
 		uni.navigateTo({
-			url: '/pages/goodsDatail/index?goods=' + item.desc
+			url: '/pages/goodsDetail/index?goods=' + item.desc
 		})
 	}
 </script>
