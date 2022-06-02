@@ -7,14 +7,17 @@
 			<view class="title">飞利浦 USB排插 SPB4320WA /93 白色</view>
 			<view class="desc">臻米 多功能电火锅 米黄色</view>
 			<view class="tag">
-				<uni-tag text="3期免息" type="primary" :inverted="true" class="aa"
+				<uni-tag text="3期免息" type="primary" :inverted="true" class="aa" size="mini"
 					custom-style="background-color:transparent;font-size:20rpx;padding:5rpx 10rpx;line-height:35rpx;margin-right:20rpx;margin-bottom: 10rpx;display:inline-block;" />
 				<uni-tag text="赠" type="error" :inverted="true"
-					custom-style="background-color:transparent;font-size:20rpx;padding:5rpx 10rpx;line-height:35rpx;margin-right:20rpx;margin-bottom: 10rpx;display:inline-block;" />
+					custom-style="background-color:transparent;font-size:20rpx;padding:5rpx 10rpx;line-height:35rpx;margin-right:20rpx;margin-bottom: 10rpx;display:inline-block;"
+					size="mini" />
 				<uni-tag text="券 | 满700减10" type="error" :inverted="true"
-					custom-style="background-color:transparent;font-size:20rpx;padding:5rpx 10rpx;line-height:35rpx;margin-right:20rpx;margin-bottom: 10rpx;display:inline-block;" />
+					custom-style="background-color:transparent;font-size:20rpx;padding:5rpx 10rpx;line-height:35rpx;margin-right:20rpx;margin-bottom: 10rpx;display:inline-block;"
+					size="mini" />
 				<uni-tag text="积分抵100%" type="error" :inverted="true"
-					custom-style="background-color:transparent;font-size:20rpx;padding:5rpx 10rpx;line-height:35rpx;margin-right:20rpx;margin-bottom: 10rpx;display:inline-block;" />
+					custom-style="background-color:transparent;font-size:20rpx;padding:5rpx 10rpx;line-height:35rpx;margin-right:20rpx;margin-bottom: 10rpx;display:inline-block;"
+					size="mini" />
 			</view>
 			<view class="priceBox">
 				<view class="newPrice">2099</view>
@@ -63,7 +66,7 @@
 				display: flex;
 				flex-wrap: wrap;
 				margin-top: 10rpx;
-				height: 56rpx;
+				height: 48rpx;
 				overflow: hidden;
 			}
 
@@ -83,7 +86,7 @@
 
 				.newPrice {
 					margin-right: 5rpx;
-					font-size: 30rpx;
+					font-size: 22rpx;
 
 					&::before {
 						content: "￥";
@@ -92,10 +95,10 @@
 				}
 
 				.oldPrice {
-					font-size: 20rpx;
+					display: none;
+					font-size: 18rpx;
 					text-decoration: line-through;
 					color: #999;
-
 				}
 			}
 		}

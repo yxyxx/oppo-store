@@ -26,7 +26,9 @@
 </template>
 <script>
 	const preloadPageUrl = '/pages/extUI/calendar/calendar'
-	import { mapState } from 'vuex'
+	import {
+		mapState
+	} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -64,38 +66,35 @@
 					});
 					return;
 				}
-				uni.reLaunch({
-					url: '/pages/tabBar/component/component'
-				});
 			},
-			customAnimation(){
+			customAnimation() {
 				uni.navigateTo({
 					url: 'new-page/new-vue-page-1?data=使用自定义动画打开页面',
 					animationType: 'slide-in-bottom',
 					animationDuration: 200
 				})
 			},
-			preloadPage(){
+			preloadPage() {
 				uni.preloadPage({
 					url: preloadPageUrl,
-					success(){
+					success() {
 						uni.showToast({
-							title:'页面预载成功'
+							title: '页面预载成功'
 						})
 					},
-					fail(){
+					fail() {
 						uni.showToast({
-							title:'页面预载失败'
+							title: '页面预载失败'
 						})
 					}
 				})
 			},
-			unPreloadPage(){
+			unPreloadPage() {
 				uni.unPreloadPage({
 					url: preloadPageUrl
 				})
 			},
-			navigateToPreloadPage(){
+			navigateToPreloadPage() {
 				uni.navigateTo({
 					url: preloadPageUrl
 				})

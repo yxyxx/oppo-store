@@ -1,5 +1,5 @@
 <template>
-	<searchInp style="position: fixed;top: 88rpx;left:0;right:0;z-index: 99;"></searchInp>
+	<searchInp style="" class="searchInp"></searchInp>
 	<view class="searchFilter">
 		<view :class="['filterItem',{'active':activeFilter=='all'}]" @click="clicFilter('all')">
 			综合
@@ -12,6 +12,8 @@
 			<view class="priceWay">
 				<view :class="['iconfont','icon-shangsanjiaoxing',{'active':priceFilter=='top'}]"></view>
 				<view :class="['iconfont','icon-xiasanjiaoxing',{'active':priceFilter=='bottom'}]"></view>
+				<!-- <uni-icons type="top" size="30"></uni-icons>
+				<uni-icons type="bottom" size="30"></uni-icons> -->
 			</view>
 		</view>
 	</view>
@@ -174,6 +176,20 @@
 		justify-content: left !important;
 	}
 
+	.searchInp {
+		position: fixed;
+		top: 0rpx;
+		left: 0;
+		right: 0;
+		z-index: 99;
+	}
+
+	// #ifdef H5
+	.searchInp {
+		top: 88rpx;
+	}
+
+	// #endif
 	.searchFilter {
 		background-color: #fff;
 		border-bottom: 1px solid #eee;
@@ -181,6 +197,7 @@
 		padding: 20rpx;
 		padding-left: 40rpx;
 		box-sizing: border-box;
+		margin-top: 114rpx;
 
 		.filterItem {
 			margin-right: 40rpx;
@@ -189,14 +206,11 @@
 		}
 
 		.filterPrice {
-			// position: relative;
 			display: flex;
 			align-items: center;
 			align-content: center;
 
 			view {
-				// position: absolute;
-				// right: -20rpx;
 				font-size: 16rpx;
 				color: #999;
 			}
@@ -222,15 +236,6 @@
 					}
 				}
 			}
-
-			// .icon-shangsanjiaoxing {
-			// 	top: 5rpx;
-			// }
-
-			// .icon-xiasanjiaoxing {
-			// 	bottom: 5rpx;
-			// }
-
 		}
 
 		.active {

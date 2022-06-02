@@ -45,8 +45,9 @@
 					<text>后结束</text>
 				</view>
 			</view>
-			<view class="more iconfont">
+			<view class="more">
 				更多
+				<uni-icons type="forward" size="10" style="color: #999;"></uni-icons>
 			</view>
 		</view>
 		<view class="goodsList">
@@ -62,7 +63,9 @@
 			</view>
 			<view class="moreGoods">
 				<view class="title">更多<br>产品</view>
-				<view class="iconfont icon-youjiantou"></view>
+				<uni-icons type="forward" size="10"
+					style="width: 46rpx;height: 46rpx;border-radius: 50%;background-color: #eee;text-align: center;line-height: 46rpx;color: #ccc;margin-top: 20rpx;">
+				</uni-icons>
 			</view>
 		</view>
 	</view>
@@ -101,6 +104,7 @@
 	} from '@dcloudio/uni-app';
 	// 返回顶部
 	onPageScroll((e) => {
+		console.log(1111111111);
 		if (e.scrollTop > 500) {
 			isShow.value = true
 		} else {
@@ -296,11 +300,6 @@
 			.more {
 				color: #999;
 				font-size: 28rpx;
-
-				&:after {
-					content: "\e62b";
-					font-size: 24rpx
-				}
 			}
 		}
 
@@ -376,16 +375,16 @@
 					color: #999;
 				}
 
-				.iconfont {
-					width: 46rpx;
-					height: 46rpx;
-					border-radius: 50%;
-					background-color: #eee;
-					text-align: center;
-					line-height: 46rpx;
-					color: #ccc;
-					margin-top: 20rpx;
-				}
+				// .iconfont {
+				// 	width: 46rpx;
+				// 	height: 46rpx;
+				// 	border-radius: 50%;
+				// 	background-color: #eee;
+				// 	text-align: center;
+				// 	line-height: 46rpx;
+				// 	color: #ccc;
+				// 	margin-top: 20rpx;
+				// }
 			}
 		}
 	}

@@ -66,14 +66,14 @@
 				配置
 			</view>
 			<uni-data-checkbox selectedTextColor="red" selectedColor="white" mode="tag" v-model="radio1"
-				:localdata="list1"></uni-data-checkbox>
+				:localdata="list1" class="uni-data-checkbox"></uni-data-checkbox>
 		</view>
 		<view class="individualChoice">
 			<view class="title">
 				颜色
 			</view>
 			<uni-data-checkbox selectedTextColor="red" selectedColor="white" mode="tag" v-model="radio2"
-				:localdata="list2"></uni-data-checkbox>
+				:localdata="list2" class="uni-data-checkbox"></uni-data-checkbox>
 		</view>
 		<view class="selecNum">
 			<view class="title">数量</view>
@@ -99,8 +99,7 @@
 				style="height: 970rpx !important;">
 				<swiper-item v-for="(item, index) in 2" :key="index">
 					<view class="recommItem">
-						<goods-item
-							style="width: 30%;border: 1px solid #9e9e9e;border-radius: 10rpx;margin-bottom: 20rpx;"
+						<goods-item style="width: 30%;border: 1px solid #eee;border-radius: 10rpx;margin-bottom: 20rpx;"
 							v-for="item in 6">
 						</goods-item>
 					</view>
@@ -148,8 +147,7 @@
 				</view>
 				<view class="integral">
 					<uni-tag text="赠送积分"
-						custom-style="background-color: rgba(246, 52, 52,.1); color: #f63434;border:none"
-						style="width:98rpx;">
+						custom-style="background-color: rgba(246, 52, 52,.1); color: #f63434;border:none">
 					</uni-tag>
 					<text class="integralDesc">购物送积分，积分将在确认收货7天后到账，帐户积分可用于商城下单抵现。</text>
 				</view>
@@ -160,10 +158,12 @@
 			</view>
 			<view class="popupPromptService" v-else-if="popupContent == 'promptService'">
 				<view class="list">
-					<view class="item" v-for="item in 10">
-						<view class="title">29天价保</view>
-						<view class="desc">29天价保，买贵退还差价。</view>
-					</view>
+					<scroll-view style="height: 660rpx;" scroll-y="true">
+						<view class="item" v-for="item in 10">
+							<view class="title">29天价保</view>
+							<view class="desc">29天价保，买贵退还差价。</view>
+						</view>
+					</scroll-view>
 				</view>
 			</view>
 			<view class="footer">
@@ -376,7 +376,7 @@
 		border-bottom: 1rpx solid #eee;
 		height: 86rpx;
 		position: fixed;
-		top: 88rpx;
+		top: 0rpx;
 		left: 0;
 		right: 0;
 		z-index: 99;
@@ -408,7 +408,47 @@
 		}
 	}
 
+	// #ifdef H5
+	.topNav {
+		top: 88rpx;
+	}
+
+	// #endif
 	// 轮播图
+	.detailSwiper {
+		.uni-swiper__dots-box[data-v-77b53eff] {
+			width: 70rpx;
+			left: calc(100vw - 100rpx);
+			border-radius: 10rpx;
+			padding: 10rpx 0;
+			bottom: 15rpx !important;
+			text-align: center;
+			background-color: rgba(0, 0, 0, .3);
+		}
+
+		.uni-swiper__dots-nav-item[data-v-77b53eff] {
+			margin: 0;
+			width: 100%;
+			text-align: center;
+		}
+
+		.uni-swiper__dots-nav-item[data-v-77b53eff] {
+			font-size: 24rpx
+		}
+	}
+
+	.individualChoice .is-checked {
+		border-color: #f63434 !important;
+	}
+
+	::v-deep .individualChoice .uni-data-checkbox .checklist-content .checklist-text span {
+		font-size: 24rpx !important;
+	}
+
+	.individualChoice .uni-data-checkbox .checklist-content .checklist-text {
+		font-size: 24rpx !important;
+	}
+
 	// #ifdef H5
 	.detailSwiper {
 		::v-deep .uni-swiper__dots-box[data-v-77b53eff] {
@@ -439,34 +479,6 @@
 
 	// #endif
 
-	// #ifdef MP-WEIXIN
-	.detailSwiper {
-		.uni-swiper__dots-box[data-v-77b53eff] {
-			width: 70rpx;
-			left: calc(100vw - 100rpx);
-			border-radius: 10rpx;
-			padding: 10rpx 0;
-			bottom: 15rpx !important;
-			text-align: center;
-			background-color: rgba(0, 0, 0, .3);
-		}
-
-		.uni-swiper__dots-nav-item[data-v-77b53eff] {
-			margin: 0;
-			width: 100%;
-			text-align: center;
-		}
-
-		.uni-swiper__dots-nav-item[data-v-77b53eff] {
-			font-size: 24rpx
-		}
-	}
-
-	.individualChoice .is-checked {
-		border-color: #f63434 !important;
-	}
-
-	// #endif
 	// 点击轮播图
 	::v-deep .detailPopup {
 		.uni-popup__wrapper {
@@ -702,7 +714,7 @@
 		}
 
 		::v-deep uni-view[data-v-7c43d41b] uni-view:first-child {
-			background-color: rgba(0, 0, 0, .9) !important;
+			// background-color: rgba(0, 0, 0, .9) !important;
 		}
 
 		::v-deep .uni-popup__wrapper {
@@ -793,9 +805,10 @@
 
 				.integralDesc {
 					font-size: 25rpx;
-					margin-left: 30rpx;
+					margin-left: 10rpx;
 					white-space: wrap;
-					width: calc(100% - 150rpx);
+					width: calc(100% - 180rpx);
+					white-space: wrap;
 				}
 			}
 
@@ -812,10 +825,10 @@
 		}
 
 		.popupPromptService {
+
 			.list {
 				padding: 0 40rpx;
 				max-height: 686rpx;
-				overflow: auto;
 
 				.item {
 					margin-bottom: 50rpx;

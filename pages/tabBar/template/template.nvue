@@ -10,8 +10,7 @@
 		</view>
 		<view :class="{'pc-hide': hideList.indexOf(item.url) !== -1  && hasLeftWin}" class="uni-panel"
 			v-for="(item, index) in list" :key="item.id">
-			<view
-				:class="{'left-win-active': leftWinActive === item.url  && hasLeftWin, 'uni-panel-h-on': item.open}"
+			<view :class="{'left-win-active': leftWinActive === item.url  && hasLeftWin, 'uni-panel-h-on': item.open}"
 				class="uni-panel-h" @click="triggerCollapse(index, item.id)">
 				<text class="uni-panel-text">{{item.name}}</text>
 				<text class="uni-panel-icon uni-icon"
@@ -123,10 +122,10 @@
 						url: 'global'
 					},
 					// #ifdef APP-PLUS
-					{
-						name: '问题反馈',
-						url: '/platforms/app-plus/feedback/feedback'
-					},
+					// {
+					// 	name: '问题反馈',
+					// 	url: '/platforms/app-plus/feedback/feedback'
+					// },
 					{
 						name: '打开外部应用',
 						url: 'scheme'
