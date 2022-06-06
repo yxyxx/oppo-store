@@ -11,11 +11,15 @@
 			"height": "60px"
 		}
 	},
-	"pages": [
+	"pages": [{
+			"path": "pages/oppoLogin/index",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
 		// pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/tabBar/component/component",
-
 			"style": {
 				"navigationBarTitleText": "内置组件",
 
@@ -334,7 +338,70 @@
 			}
 		}
 		// #endif
-	],
+	    ,{
+            "path" : "pages/oppoMy/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/oppoMy/address/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "选择收货地址",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/oppoMy/address/add",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/oppoOrder/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单列表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/oppoOrder/orderDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/oppoShopping/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/oppoShopping/account",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"subPackages": [{
 			"root": "pages/API",
 			"pages": [{
@@ -1313,11 +1380,11 @@
 		"pageOrientation": "portrait",
 		"navigationBarTitleText": "Hello uniapp",
 		"navigationBarTextStyle": "white",
-		"navigationBarBackgroundColor": "#007AFF",
+		"navigationBarBackgroundColor": "#F7F7F7",
 		"backgroundColor": "#F8F8F8",
 		"backgroundColorTop": "#F4F5F6",
 		"backgroundColorBottom": "#F4F5F6",
-		"navigationStyle": "custom",
+		// "navigationStyle": "custom",
 		"mp-360": {
 			"navigationStyle": "custom"
 		},
@@ -1354,6 +1421,46 @@
 				"iconPath": "static/template.png",
 				"selectedIconPath": "static/templateHL.png",
 				"text": "模板"
+			}
+		]
+	},
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "pages/oppoMy/index", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			},
+			{
+				"name": "", //模式名称
+				"path": "pages/oppoMy/address/index", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			},
+			{
+				"name": "", //模式名称
+				"path": "pages/oppoMy/address/add", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			},
+			{
+				"name": "", //模式名称
+				"path": "pages/oppoOrder/index", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			},
+			{
+				"name": "", //模式名称
+				"path": "pages/oppoOrder/orderDetail", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			},
+			{
+				"name": "", //模式名称
+				"path": "pages/oppoShopping/account", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			},
+			{
+				"name": "", //模式名称
+				"path": "pages/oppoShopping/index", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
 			}
 		]
 	}
