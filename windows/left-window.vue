@@ -1,18 +1,16 @@
 <template>
 	<view class="left-window-style">
 		<view class="second-menu">
-			<!-- <keep-alive> -->
 			<component v-bind:is="active" :hasLeftWin="hasLeftWin" :leftWinActive="leftWinActive"></component>
-			<!-- </keep-alive> -->
 		</view>
 	</view>
 </template>
 
 <script>
-	import componentPage from '@/pages/tabBar/component/component.nvue'
-	import API from '@/pages/tabBar/API/API.nvue'
-	import extUI from '@/pages/tabBar/extUI/extUI.nvue'
-	import templatePage from '@/pages/tabBar/template/template.nvue'
+	// import componentPage from '@/pages/tabBar/component/component.nvue'
+	// import API from '@/pages/tabBar/API/API.nvue'
+	// import extUI from '@/pages/tabBar/extUI/extUI.nvue'
+	// import templatePage from '@/pages/tabBar/template/template.nvue'
 	import {
 		mapMutations,
 		mapState
@@ -23,24 +21,24 @@
 			return {
 				nav: [
 					'component',
-					'API',
-					'extUI',
-					'template'
+					// 'API',
+					// 'extUI',
+					// 'template'
 				],
 				isPC: false
 			}
 		},
 		components: {
-			componentPage,
-			API,
-			extUI,
-			templatePage
+			// componentPage,
+			// API,
+			// extUI,
+			// templatePage
 		},
 		computed: {
 			...mapState({
 				active: state => state.active,
 				hasLeftWin: state => !state.noMatchLeftWindow,
-				leftWinActive: state => state.leftWinActive.split('/')[3],
+				// leftWinActive: state => state.leftWinActive.split('/')[3],
 			})
 		},
 		mounted() {
@@ -55,7 +53,8 @@
 				if (!pageUrl) return
 				const pageName = this.$route.path.split('/')[4]
 				if (pageUrl === '/' || this.nav.includes(pageName)) {
-					const tabbarUrl = pageName ? (pageName === 'component' ? '/' : `/pages/tabBar/${pageName}/${pageName}`) : '/'
+					const tabbarUrl = pageName ? (pageName === 'component' ? '/' :
+						`/pages/tabBar/${pageName}/${pageName}`) : '/'
 					if (pageUrl === '/' || pageUrl === tabbarUrl) {
 						uni.switchTab({
 							url: pageUrl,
@@ -75,7 +74,8 @@
 				if (matched) {
 					const pageUrl = this.$route.path
 					const tabbarName = this.$route.path.split('/')[2]
-					const tabbarUrl = tabbarName && (tabbarName === 'component' ? '/' : `/pages/tabBar/${tabbarName}/${tabbarName}`)
+					const tabbarUrl = tabbarName && (tabbarName === 'component' ? '/' :
+						`/pages/tabBar/${tabbarName}/${tabbarName}`)
 					uni.switchTab({
 						url: tabbarUrl,
 						success(e) {
@@ -130,16 +130,16 @@
 						})
 					} else {
 						this.setLeftWinActive(newRoute.path)
-						let active = newRoute.path.split('/')[2]
-						if (this.nav.includes(active)) {
-							if (active === 'component') {
-								active = 'componentPage'
-							}
-							if (active === 'template') {
-								active = 'templatePage'
-							}
-							this.setActive(active)
-						}
+						// let active = newRoute.path.split('/')[2]
+						// if (this.nav.includes(active)) {
+						// 	if (active === 'component') {
+						// 		active = 'componentPage'
+						// 	}
+						// 	if (active === 'template') {
+						// 		active = 'templatePage'
+						// 	}
+						// 	this.setActive(active)
+						// }
 					}
 				}
 			},
