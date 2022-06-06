@@ -1,6 +1,6 @@
 {
-	"name" : "",
-	"appid" : "",
+	"name": "",
+	"appid": "",
 	"description": "应用描述",
 	"versionName": "1.0.0",
 	"versionCode": "100",
@@ -71,8 +71,8 @@
 				"speech": {
 					"ifly": {}
 				}
-			},
-			"orientation": ["portrait-primary"]
+			}
+			// "orientation": ["portrait-primary"]
 		}
 	},
 	/* 快应用特有相关 */

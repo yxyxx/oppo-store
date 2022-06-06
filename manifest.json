@@ -116,6 +116,16 @@
 		"usingComponents": true
 	},
 	"h5": {
+		"devServer": {
+			"proxy": { //配置代理服务器来解决跨域问题，uniapp不适用CORS方案和设置JSONP方案
+				"/api/": { //映射域名
+					"target": "http://localhost:3000",
+					"pathRewrite": {
+						"^/api": "https://www.opposhop.cn"
+					}
+				}
+			}
+		},
 		"template": "template.h5.html",
 		"router": {
 			"mode": "history",

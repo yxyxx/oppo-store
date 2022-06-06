@@ -96,7 +96,7 @@
 		<uni-swiper-dot class="uni-swiper-dot-box" :info="recomSwiperInfo" :current="recomSwiperCurrent" :mode="'dot'"
 			:dots-styles="recomSwiperDotsStyles" field="content">
 			<swiper class="swiper-box" @change="recomSwiperChange" :current="recomSwiperDotIndex"
-				style="height: 970rpx !important;">
+				style="height: 870rpx !important;">
 				<swiper-item v-for="(item, index) in 2" :key="index">
 					<view class="recommItem">
 						<goods-item style="width: 30%;border: 1px solid #eee;border-radius: 10rpx;margin-bottom: 20rpx;"
@@ -587,11 +587,13 @@
 
 			.tag {
 				color: #f79a47;
+				font-size: 24rpx;
 			}
 		}
 
 		.more {
 			color: #f79a47;
+			font-size: 24rpx;
 		}
 	}
 
@@ -796,11 +798,12 @@
 			}
 
 			.integral {
+				width: 100%;
 				padding: 40rpx;
 				padding-top: 20rpx;
+				box-sizing: border-box;
 				display: flex;
 				justify-content: space-between;
-				white-space: nowrap;
 				align-items: flex-start;
 
 				.integralDesc {

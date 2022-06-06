@@ -40,19 +40,20 @@
 			width: 100%;
 
 			.title {
-				font-size: 27rpx;
+				font-size: 24rpx;
 				color: #333;
-				line-height: 37rpx;
+				line-height: 34rpx;
 				width: 100%;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				display: -webkit-box;
+				text-indent: 5rpx;
 				-webkit-line-clamp: 2;
 				-webkit-box-orient: vertical;
 			}
 
 			.desc {
-				font-size: 26rpx;
+				font-size: 22rpx;
 				color: #999;
 				margin-top: 5rpx;
 				overflow: hidden;
@@ -78,6 +79,7 @@
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
+				margin-top: 10rpx;
 
 				.handWay {
 					font-size: 20rpx;

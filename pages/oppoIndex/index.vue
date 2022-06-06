@@ -153,6 +153,15 @@
 	const clicBanner = () => {
 		console.log(current.value);
 	}
+	// uni.request({
+	// 	url: this.$host + '/cn/oapi/configs/web/banners/040101,040201',
+	// 	method: 'GET',
+	// 	success: res => {
+	// 		console.log(res);
+	// 	},
+	// 	fail: () => {},
+	// 	complete: () => {}
+	// });
 	// 倒计时
 	const hour = 1
 	const minute = 0
