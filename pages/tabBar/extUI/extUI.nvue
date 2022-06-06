@@ -10,11 +10,11 @@
 		</view>
 		<view :class="{'pc-hide': hideList.indexOf(item.url) !== -1  && hasLeftWin}" class="uni-panel"
 			v-for="item in lists" :key="item.url">
-			<view :class="{'left-win-active': leftWinActive ===  item.url && hasLeftWin}" class="uni-panel-h"
+			<!-- <view :class="{'left-win-active': leftWinActive ===  item.url && hasLeftWin}" class="uni-panel-h"
 				@click="goDetailPage(item.url)">
 				<text class="uni-panel-text">{{item.name}}</text>
 				<text class="uni-panel-icon uni-icon">&#xe470;</text>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -41,10 +41,6 @@
 						name: "uni-breadcrumb 面包屑",
 						url: "breadcrumb"
 					},
-					// {
-					// 	name: "uni-calendar 日历",
-					// 	url: "calendar"
-					// },
 					{
 						name: "uni-card 卡片",
 						url: "card"
@@ -224,41 +220,41 @@
 			};
 		},
 		onLoad() {},
-		onReady() {
-			// #ifdef APP-NVUE
-			uni.preloadPage({
-				url: "/pages/extUI/calendar/calendar",
-				success() {
-					console.log("preloadPage /pages/extUI/calendar/calendar")
-				},
-				fail() {}
-			})
-			// #endif
-		},
-		onShareAppMessage() {
-			return {
-				title: '欢迎体验uni-app',
-				path: '/pages/tabBar/extUI/extUI'
-			}
-		},
+		// onReady() {
+		// 	// #ifdef APP-NVUE
+		// 	uni.preloadPage({
+		// 		url: "/pages/extUI/calendar/calendar",
+		// 		success() {
+		// 			console.log("preloadPage /pages/extUI/calendar/calendar")
+		// 		},
+		// 		fail() {}
+		// 	})
+		// 	// #endif
+		// },
+		// onShareAppMessage() {
+		// 	return {
+		// 		title: '欢迎体验uni-app',
+		// 		path: '/pages/tabBar/extUI/extUI'
+		// 	}
+		// },
 		onNavigationBarButtonTap(e) {
 			uni.navigateTo({
 				url: '/pages/about/about'
 			});
 		},
 		methods: {
-			goDetailPage(path) {
-				const url = '/pages/extUI/' + path + '/' + path
-				if (this.hasLeftWin) {
-					uni.reLaunch({
-						url: url
-					})
-				} else {
-					uni.navigateTo({
-						url: url
-					})
-				}
-			}
+			// goDetailPage(path) {
+			// 	const url = '/pages/extUI/' + path + '/' + path
+			// 	if (this.hasLeftWin) {
+			// 		uni.reLaunch({
+			// 			url: url
+			// 		})
+			// 	} else {
+			// 		uni.navigateTo({
+			// 			url: url
+			// 		})
+			// 	}
+			// }
 		}
 	}
 </script>

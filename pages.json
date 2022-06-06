@@ -63,7 +63,7 @@
 			}
 		},
 		{
-			"path": "pages/extUI/index",
+			"path": "pages/oppoCart/index",
 			"style": {
 				"navigationBarTitleText": "扩展组件",
 				"app-plus": {
@@ -1011,12 +1011,14 @@
 				"iconPath": "static/api.png",
 				"selectedIconPath": "static/apiHL.png",
 				"text": "分类"
-			}, {
-				"pagePath": "pages/extUI/index",
+			},
+			{
+				"pagePath": "pages/oppoCart/index",
 				"iconPath": "static/extui.png",
 				"selectedIconPath": "static/extuiHL.png",
 				"text": "扩展组件"
-			}, {
+			},
+			{
 				"pagePath": "pages/tabBar/template/template",
 				"iconPath": "static/template.png",
 				"selectedIconPath": "static/templateHL.png",

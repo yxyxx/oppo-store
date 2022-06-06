@@ -25,7 +25,7 @@
 	</view>
 </template>
 <script>
-	const preloadPageUrl = '/pages/extUI/calendar/calendar'
+	// const preloadPageUrl = '/pages/extUI/calendar/calendar'
 	import {
 		mapState
 	} from 'vuex'
@@ -75,19 +75,19 @@
 				})
 			},
 			preloadPage() {
-				uni.preloadPage({
-					url: preloadPageUrl,
-					success() {
-						uni.showToast({
-							title: '页面预载成功'
-						})
-					},
-					fail() {
-						uni.showToast({
-							title: '页面预载失败'
-						})
-					}
-				})
+				// uni.preloadPage({
+				// 	url: preloadPageUrl,
+				// 	success() {
+				// 		uni.showToast({
+				// 			title: '页面预载成功'
+				// 		})
+				// 	},
+				// 	fail() {
+				// 		uni.showToast({
+				// 			title: '页面预载失败'
+				// 		})
+				// 	}
+				// })
 			},
 			unPreloadPage() {
 				uni.unPreloadPage({
