@@ -8,11 +8,12 @@
 	</view>
 	<!-- swiper -->
 	<view class="swiper-bannner" @click="clicBanner">
-		<uni-swiper-dot class="uni-swiper-dot-box" @clickItem=clickItem :info="util.swiperimages" :current="current"
+		<uni-swiper-dot class="uni-swiper-dot-box" @clickItem=clickItem :info="indexBannerSwiper" :current="current"
 			:mode="mode" :dots-styles="dotsStyles" field="content">
-			<swiper class="swiper-box" @change="change" :current="swiperDotIndex" autoplay circular interval=3000>
-				<swiper-item v-for="(item, index) in util.swiperimages" :key="index">
-					<image :src="item" mode="heightFix" width="100%"></image>
+			<swiper class="swiper-box" @change="change" :current="util.swiperDotIndex" autoplay circular interval=3000>
+				{{item}}
+				<swiper-item v-for="(item, index) in indexBannerSwiper" :key="index">
+					<image :src="item.url" mode="heightFix" width="100%"></image>
 				</swiper-item>
 			</swiper>
 		</uni-swiper-dot>
@@ -20,8 +21,8 @@
 	<!-- navsort -->
 	<view class="nav-sort">
 		<view class="sort-item" v-for="(item) in navSort" :key="item">
-			<image :src="item.img" mode="widthFix" style="width:100rpx"></image>
-			<view>{{item.text}}</view>
+			<image :src="item.url" mode="widthFix" style="width:100rpx"></image>
+			<view>{{item.title}}</view>
 		</view>
 	</view>
 	<view class="main">
@@ -41,7 +42,8 @@
 			<view class="left">
 				<text class="titleText">今日必抢 </text>
 				<view class="countdown">
-					<uni-countdown :show-day="false" :hour="hour" :minute="minute" :second="second" color="#f63434" />
+					<uni-countdown :show-day="false" :second="(todayRobList.endAt - todayRobList.beginAt)/1000"
+						color="#f63434" />
 					<text>后结束</text>
 				</view>
 			</view>
@@ -51,14 +53,14 @@
 			</view>
 		</view>
 		<view class="goodsList">
-			<view class="goodsItem" v-for="item in todayRobList" :key="item">
-				<image :src="item.img" mode="widthFix" style="width: 184rpx;"></image>
+			<view class="goodsItem" v-for="item in todayRobList.productDetailss" :key="item">
+				<image :src="item.url" mode="widthFix" style="width: 184rpx;"></image>
 				<view class="info">
-					{{item.info}}
+					{{item.title}}
 				</view>
 				<view class="price">
-					<text class="newPrice">{{item.newPrice}}</text>
-					<text class="oldPrice">{{item.oldPrice}}</text>
+					<text class="newPrice">{{item.priceInfo.price}}</text>
+					<text class="oldPrice">{{item.priceInfo.originalPrice}}</text>
 				</view>
 			</view>
 			<view class="moreGoods">
@@ -72,19 +74,19 @@
 	<!-- 大分类 -->
 	<view class="main">
 		<view class="sort-pannel" v-for="item in sortPannel" :key="item">
-			<view class="title" style="margin-top:20rpx">{{item.title}}</view>
-			<image :src="item.bannerImage" mode="widthFix" style="width:100%;border-radius: 20rpx;margin: 25rpx 0;">
+			<view class="title" style="margin-top:20rpx">{{item.name}}</view>
+			<image :src="item.url" mode="widthFix" style="width:100%;border-radius: 20rpx;margin: 25rpx 0;">
 			</image>
-			<view class="sort-item" v-for="itemList in item.list" :key="itemList">
+			<view class="sort-item" v-for="itemList in item.productDetailss" :key="itemList">
 				<view class="">
-					<image :src="itemList.img" mode="widthFix" style="width: 100%;"></image>
+					<image :src="itemList.url" mode="widthFix" style="width: 100%;"></image>
 					<view class="info">
-						{{itemList.info}}
+						{{itemList.goodsSpuName}}
 					</view>
 				</view>
 				<view class="price">
-					<text>{{itemList.calculation}}</text>
-					{{itemList.price}}
+					<text>{{itemList.priceInfo.prefix}}</text>
+					{{itemList.priceInfo.buyPrice || itemList.priceInfo.price}}
 				</view>
 			</view>
 		</view>
@@ -102,6 +104,8 @@
 		onLoad,
 		onPageScroll
 	} from '@dcloudio/uni-app';
+	import store from '@/store/index.js';
+	store.dispatch('getIndexBannerSwiper')
 	// 返回顶部
 	onPageScroll((e) => {
 		console.log(1111111111);
@@ -112,14 +116,12 @@
 		}
 	})
 	const {
-		swiperimages,
 		dotStyle,
 		dotsStyles,
 		floorPanelImages,
-		navSort,
 		floorPanelColumnImages,
-		sortPannel,
-		todayRobList
+		// sortPannel,
+		// todayRobList
 	} = util
 	import Footer from '@/components/footer.vue'
 	import Search from '@/components/search.vue'
@@ -130,6 +132,7 @@
 	const mode = ref('dot')
 	const swiperDotIndex = ref(0)
 	const isShow = ref(false)
+	const indexBannerSwiper = ref([])
 	const change = (e) => {
 		current.value = e.detail.current
 	}
@@ -149,20 +152,38 @@
 	const onBanner = (index) => {
 		console.log(22222, index);
 	}
+	uni.request({
+		url: '/api/cn/oapi/configs/web/banners/040101,040201',
+		method: 'GET',
+		success: res => {
+			indexBannerSwiper.value = res.data.data
+		}
+	})
 	// 点击banner跳转
 	const clicBanner = () => {
 		console.log(current.value);
 	}
+	// navsort
+	const navSort = ref([])
 	uni.request({
-		// https://dev.api.dahuangf.com/common/captcha?
-		url: '/api/common/captcha',
+		url: '/api/cn/oapi/configs/web/icons/040202,040203',
 		method: 'GET',
 		success: res => {
-			console.log(res);
-		},
-		fail: () => {},
-		complete: () => {}
-	});
+			navSort.value = res.data.data
+		}
+	})
+	// todayRobList今日必抢
+	const todayRobList = ref([])
+	const sortPannel = ref([])
+	uni.request({
+		url: '/api/cn/oapi/goods/web/products/v15/040204',
+		method: 'GET',
+		success: res => {
+			todayRobList.value = res.data.data[0]
+			res.data.data.splice(0, 1)
+			sortPannel.value = res.data.data
+		}
+	})
 	// 倒计时
 	const hour = 1
 	const minute = 0

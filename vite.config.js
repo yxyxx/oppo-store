@@ -11,7 +11,7 @@ export default defineConfig({
 		port: 3001,
 		proxy: {
 			'/api': {
-				target: 'https://dev.api.dahuangf.com', // 目标服务  
+				target: 'https://www.opposhop.cn', // 目标服务  
 				changeOrigin: true,
 				rewrite: path => path.replace(/^\/api/, ''),
 			}

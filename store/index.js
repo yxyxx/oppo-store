@@ -24,9 +24,13 @@ const store = new Vuex.Store({
 					// leftWinActive: '/pages/component/view/view',
 					activeOpen: '',
 					menu: [],
-					univerifyErrorMsg: ''
+					univerifyErrorMsg: '',
+					indexBannerSwiper: []
 				},
 				mutations: {
+					setIndexBannerSwiper(state, provider) {
+						state.indexBannerSwiper = provider;
+					},
 					login(state, provider) {
 						state.hasLogin = true;
 						state.loginProvider = provider;
@@ -76,6 +80,19 @@ const store = new Vuex.Store({
 					}
 				},
 				actions: {
+					getIndexBannerSwiper: async ({
+						commit,
+						state
+					}) => {
+						await uni.request({
+							url: '/api/cn/oapi/configs/web/banners/040101,040201',
+							method: 'GET',
+							success: res => {
+								commit('setIndexBannerSwiper', res.data.data)
+								// return res.data.data
+							},
+						});
+					},
 					// lazy loading openid
 					getUserOpenId: async function({
 						commit,

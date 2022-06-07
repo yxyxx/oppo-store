@@ -9,7 +9,7 @@
 			<swiper-item v-for="(item ,index) in info" :key="index" @touchmove.stop="stopTouchMove"
 				style="opacity: .5;">
 				<view class="swiper-item">
-					{{item.content}}
+					{{item.title}}
 				</view>
 			</swiper-item>
 		</swiper>
@@ -20,24 +20,21 @@
 	import {
 		ref,
 	} from 'vue'
-	const info = [{
-		content: ' 新人9.9元包邮 '
-	}, {
-		content: ' OPPO Reno8 系列 '
-	}, {
-		content: ' Find X5 Pro '
-	}, {
-		content: ' 一加 Ace 竞速版 '
-	}, {
-		content: ' OPPO Pad Air '
-	}]
+	const info = ref([])
+	const current = ref('')
+	uni.request({
+		url: '/api/cn/oapi/configs/web/icons/040109',
+		method: 'GET',
+		success: res => {
+			info.value = res.data.data
+			current.value = info.value[0].title
+		}
+	})
 	const stopTouchMove = () => {
 		return false
 	}
-	const current = ref('')
-	current.value = info[0].content
 	const change = (val) => {
-		current.value = info[val.detail.current].content
+		current.value = info.value[val.detail.current].title
 	}
 	const search = () => {
 		console.log(current.value);
